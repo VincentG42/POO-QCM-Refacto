@@ -2,7 +2,7 @@
  class Question{
      private $questionContent ;
      private array $answers =[];
-     private  string $Explications;
+     private  string $explications;
 
 
      public function __construct($questionContent){
@@ -22,11 +22,15 @@
     }
 
     public function setExplications($explication){
-        $this->Explications =$explication;
+        $this->explications =$explication;
     }
 
     public function getanswers(){
-        var_dump($this -> answers);
+        return $this-> answers;
+    }
+
+    public function getExplications(){
+        return $this -> explications;
     }
  }
 

@@ -5,7 +5,7 @@
 
      
      public function addQuestion( Question $question){
-         array_push($questionList, $question);
+         $this->questionList[] = $question;
          
         }
         
