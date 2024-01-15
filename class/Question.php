@@ -1,37 +1,53 @@
 <?php
  class Question{
-     private $questionContent ;
-     private array $answers =[];
+    private PDO  $database;
+
+     private string $questionContent ;
      private  string $explications;
+     private int $id;
 
 
-     public function __construct($questionContent){
-        $this-> questionContent = $questionContent;        
+     public function __construct($database){
+        $this->database =$database;
      }
 
-
-    public function questionDisplay(){ 
-        
-        foreach($this->answers as $answer){
-                $answer->display();
-        }
-    }
-
-    public function addAnswer( Answer $answer){
-        $this->answers[] =$answer;
-    }
-
-    public function setExplications($explication){
+  
+    public function setExplications( string $explication) : void{
         $this->explications =$explication;
-    }
-
-    public function getanswers(){
-        return $this-> answers;
     }
 
     public function getExplications(){
         return $this -> explications;
     }
+
+    public function setQuestionContent(string $questionContent){
+         $this->questionContent =$questionContent;
+    }
+
+       public function getQuestionContent(){
+        return $this-> questionContent;
+    }
+
+    public function setQuestionId(int $questionId){
+        $this->id =$questionId;
+   }
+
+      public function getQuestionId(){
+       return $this-> id;
+   }
+
+   public function getAnswers($id){
+    $id= $this->id;
+    $request = $this ->database -> query("SELECT * FROM answer where id='$id'");
+        $answers    = $request->fetchAll();
+
+
+        return $answers;
+  
+}
+
+
+
  }
 
 
