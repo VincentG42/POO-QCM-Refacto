@@ -23,6 +23,7 @@ require_once('./config/connect_db.php');
 $qcm = new Qcm($database);
 
 $qcm->getQuestions();
+$qcm->generate();
 
 
 

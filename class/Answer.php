@@ -1,43 +1,48 @@
 <?php
-class Answer{
+class Answer
+{
 
-    private  string $answerContent;
+    private PDO  $database;
+    private  string $answer;
     private bool $isCorrect;
     private int $questionId;
     private int $answerId;
- 
-    
-    public function __construct($answerContent, $isCorrect= false){
-        $this-> answerContent = $answerContent;
-        $this-> isCorrect = $isCorrect;
+
+
+    public function __construct($data,$database)
+    {
+        $this-> database = $database;
+        $this->answer = $data['answer'];
+        $this->isCorrect = $data['is_correct'];
+        $this->questionId = $data['question_id'];
     }
 
-    public function setAnswerContent($answerContent){
-        $this->answerContent = $answerContent;
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
     }
 
-    public function getAnswerContent(){
-        return $this-> answerContent;
+    public function getAnswer()
+    {
+        return $this->answer;
     }
-    public function setIsCorrect($isCorrect){
+    public function setIsCorrect($isCorrect)
+    {
         $this->isCorrect = $isCorrect;
     }
 
-    public function getIsCorrect(){
-        return $this-> isCorrect;
+    public function getIsCorrect()
+    {
+        return $this->isCorrect;
     }
 
-    public function setQuestionID($QuestionID){
-        $this->questionId = $QuestionID;
+    public function setQuestionID($questionID)
+    {
+        $this->questionId = $questionID;
     }
 
-    public function getQuestionID(){
-        return $this-> questionId;
+    public function getQuestionID()
+    {
+        return $this->questionId;
     }
-
-    
-     
-        
 }
-
- 

@@ -1,56 +1,68 @@
 <?php
- class Question{
+class Question
+{
+
     private PDO  $database;
+    private string $question;
+    private  string $explications;
+    private int $id;
+    private array $answers = [];
 
-     private string $questionContent ;
-     private  string $explications;
-     private int $id;
 
-
-     public function __construct($database){
-        $this->database =$database;
-     }
-
-  
-    public function setExplications( string $explication) : void{
-        $this->explications =$explication;
+    public function __construct($data,$database)
+    {
+        $this-> database = $database;
+        $this->question = $data['question'];
+        $this->explications = $data['explication'];
+        $this->id = $data['id'];
     }
 
-    public function getExplications(){
-        return $this -> explications;
+
+    public function setExplications(string $explication): void
+    {
+        $this->explications = $explication;
     }
 
-    public function setQuestionContent(string $questionContent){
-         $this->questionContent =$questionContent;
+    public function getExplications()
+    {
+        return $this->explications;
     }
 
-       public function getQuestionContent(){
-        return $this-> questionContent;
+    public function setQuestionContent(string $questionContent)
+    {
+        $this->question = $questionContent;
     }
 
-    public function setQuestionId(int $questionId){
-        $this->id =$questionId;
-   }
+    public function getQuestionContent()
+    {
+        return $this->question;
+    }
 
-      public function getQuestionId(){
-       return $this-> id;
-   }
+    public function setQuestionId(int $questionId)
+    {
+        $this->id = $questionId;
+    }
 
-   public function getAnswers($id){
-    $id= $this->id;
-    $request = $this ->database -> query("SELECT * FROM answer where id='$id'");
+    public function getQuestionId()
+    {
+        return $this->id;
+    }
+
+    public function getAnswers()
+    {
+        $request = $this->database->query("SELECT * FROM answer");
         $answers    = $request->fetchAll();
+        $this->hydrateAnswer($answers);
+        return $this-> answers;
+    }
 
+    private function hydrateAnswer($answers)
+    {
 
-        return $answers;
-  
+        foreach ($answers as $answer) {
+            $newAnswer = new Answer($answer, $this->database);
+            $this->answers[] = $newAnswer;
+        }
+     
+    }
 }
-
-
-
- }
-
-
-
-
-?>
