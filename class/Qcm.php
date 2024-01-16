@@ -65,7 +65,7 @@ class Qcm
                 echo $answer->getAnswer() . "<br>";
             }
 
-            echo $question->getExplications();
+            echo $question->getExplications()."<br><br><br>";
         }
     }
 }

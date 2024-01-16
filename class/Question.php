@@ -50,9 +50,13 @@ class Question
 
     public function getAnswers()
     {
-        $request = $this->database->query("SELECT * FROM answer");
+        $questionId = $this ->getQuestionId();
+       
+        $request = $this->database->query("SELECT * FROM answer where question_id='$questionId'");
         $answers    = $request->fetchAll();
+       
         $this->hydrateAnswer($answers);
+       
         return $this-> answers;
     }
 
